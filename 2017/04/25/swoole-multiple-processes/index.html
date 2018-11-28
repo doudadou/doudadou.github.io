@@ -112,27 +112,27 @@
 
 
 
-  <meta name="description" content="webpack搭建ReactJS环境首先看下项目模型 项目模型/app- main.js- TestOne.js- TestTwo.js/build- bundle.js(会通过webpack自动生成)- index.html- package.json- webpack.config.js">
-<meta name="keywords" content="Webpack,ReactJs">
+  <meta name="description" content="多进程不能共用连接官方文档 其实这个是所有多进程、多线程程序都需要注意的问题，当进程or线程共享资源的时候，一定要考虑资源冲突，否则会出现各种诡异的问题（死锁、数据返回异常、连接被关闭等等等）。 如下代码，在Swoole中，在server启动时创建了一个redis连接，在onRequest中使用。 代码看上去没什么问题，但是实际使用时，如果压力很大，就会出现多进程抢占连接导致的问题。原因是因为创建">
+<meta name="keywords" content="php,Swoole,TCP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用webpack搭建ReactJS环境安装流程">
-<meta property="og:url" content="http://kaibin.me/2015/06/10/webpack-reactjs-build/index.html">
+<meta property="og:title" content="【Swoole】Swoole多进程不能共用连接&amp;TCP协议包完整性">
+<meta property="og:url" content="http://kaibin.me/2017/04/25/swoole-multiple-processes/index.html">
 <meta property="og:site_name" content="Kai&#39;s Blog">
-<meta property="og:description" content="webpack搭建ReactJS环境首先看下项目模型 项目模型/app- main.js- TestOne.js- TestTwo.js/build- bundle.js(会通过webpack自动生成)- index.html- package.json- webpack.config.js">
+<meta property="og:description" content="多进程不能共用连接官方文档 其实这个是所有多进程、多线程程序都需要注意的问题，当进程or线程共享资源的时候，一定要考虑资源冲突，否则会出现各种诡异的问题（死锁、数据返回异常、连接被关闭等等等）。 如下代码，在Swoole中，在server启动时创建了一个redis连接，在onRequest中使用。 代码看上去没什么问题，但是实际使用时，如果压力很大，就会出现多进程抢占连接导致的问题。原因是因为创建">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://camo.githubusercontent.com/ebc085019011ababb0d35024824304831c7dc72a/68747470733a2f2f7765627061636b2e6769746875622e696f2f6173736574732f6c6f676f2e706e67">
-<meta property="og:updated_time" content="2018-11-28T06:55:14.636Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxnsxg3jeej30go0a03yz.jpg">
+<meta property="og:updated_time" content="2018-11-28T07:39:53.069Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用webpack搭建ReactJS环境安装流程">
-<meta name="twitter:description" content="webpack搭建ReactJS环境首先看下项目模型 项目模型/app- main.js- TestOne.js- TestTwo.js/build- bundle.js(会通过webpack自动生成)- index.html- package.json- webpack.config.js">
-<meta name="twitter:image" content="https://camo.githubusercontent.com/ebc085019011ababb0d35024824304831c7dc72a/68747470733a2f2f7765627061636b2e6769746875622e696f2f6173736574732f6c6f676f2e706e67">
+<meta name="twitter:title" content="【Swoole】Swoole多进程不能共用连接&amp;TCP协议包完整性">
+<meta name="twitter:description" content="多进程不能共用连接官方文档 其实这个是所有多进程、多线程程序都需要注意的问题，当进程or线程共享资源的时候，一定要考虑资源冲突，否则会出现各种诡异的问题（死锁、数据返回异常、连接被关闭等等等）。 如下代码，在Swoole中，在server启动时创建了一个redis连接，在onRequest中使用。 代码看上去没什么问题，但是实际使用时，如果压力很大，就会出现多进程抢占连接导致的问题。原因是因为创建">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fxnsxg3jeej30go0a03yz.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://kaibin.me/2015/06/10/webpack-reactjs-build/">
+  <link rel="canonical" href="http://kaibin.me/2017/04/25/swoole-multiple-processes/">
 
 
 
@@ -142,7 +142,7 @@
   };
 </script>
 
-  <title>使用webpack搭建ReactJS环境安装流程 | Kai's Blog</title>
+  <title>【Swoole】Swoole多进程不能共用连接&TCP协议包完整性 | Kai's Blog</title>
   
 
 
@@ -369,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://kaibin.me/2015/06/10/webpack-reactjs-build/">
+    <link itemprop="mainEntityOfPage" href="http://kaibin.me/2017/04/25/swoole-multiple-processes/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kai">
@@ -386,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用webpack搭建ReactJS环境安装流程
+          <h1 class="post-title" itemprop="name headline">【Swoole】Swoole多进程不能共用连接&TCP协议包完整性
               
             
           </h1>
@@ -411,7 +411,7 @@
                 
               
 
-              <time title="Created: 2015-06-10 10:04:07" itemprop="dateCreated datePublished" datetime="2015-06-10T10:04:07+08:00">2015-06-10</time>
+              <time title="Created: 2017-04-25 11:20:33" itemprop="dateCreated datePublished" datetime="2017-04-25T11:20:33+08:00">2017-04-25</time>
             
 
             
@@ -444,9 +444,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2015/06/10/webpack-reactjs-build/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/25/swoole-multiple-processes/#comments" itemprop="discussionUrl">
                 
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/06/10/webpack-reactjs-build/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/25/swoole-multiple-processes/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -483,8 +483,8 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="https://camo.githubusercontent.com/ebc085019011ababb0d35024824304831c7dc72a/68747470733a2f2f7765627061636b2e6769746875622e696f2f6173736574732f6c6f676f2e706e67" rel="gallery_cjp0v1g75000x8bmzezp6m79o" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://camo.githubusercontent.com/ebc085019011ababb0d35024824304831c7dc72a/68747470733a2f2f7765627061636b2e6769746875622e696f2f6173736574732f6c6f676f2e706e67" itemprop="contentUrl">
+              <a class="post-gallery-img fancybox" href="https://ws1.sinaimg.cn/large/006tNbRwgy1fxnsxg3jeej30go0a03yz.jpg" rel="gallery_cjp0v1g73000u8bmzzat834gc" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxnsxg3jeej30go0a03yz.jpg" itemprop="contentUrl">
               </a>
             
           
@@ -495,25 +495,45 @@
       
 
       
-        <p>webpack搭建ReactJS环境首先看下项目模型</p>
-<h1 id="项目模型"><a href="#项目模型" class="headerlink" title="项目模型"></a>项目模型</h1><p>/app<br>- main.js<br>- TestOne.js<br>- TestTwo.js<br>/build<br>- bundle.js(会通过webpack自动生成)<br>- index.html<br>- package.json<br>- webpack.config.js</p>
+        <h1 id="多进程不能共用连接"><a href="#多进程不能共用连接" class="headerlink" title="多进程不能共用连接"></a>多进程不能共用连接</h1><p><a href="https://wiki.swoole.com/wiki/page/325.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>其实这个是所有多进程、多线程程序都需要注意的问题，当进程or线程共享资源的时候，一定要考虑资源冲突，否则会出现各种诡异的问题（死锁、数据返回异常、连接被关闭等等等）。</p>
+<p>如下代码，在Swoole中，在server启动时创建了一个redis连接，在<code>onRequest</code>中使用。</p>
+<p>代码看上去没什么问题，但是实际使用时，如果压力很大，就会出现多进程抢占连接导致的问题。原因是因为创建的redis连接实际上是一个全局对象，每个work进程都在使用同一个连接。</p>
 <a id="more"></a>
-<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir app build &amp;&amp; touch webpack.config.js app/main.js app/TestOne.js app/TestTwo.js build/index.html</span><br></pre></td></tr></table></figure>
-<h2 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* main.js */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</span><br><span class="line"><span class="keyword">var</span> TestOne = <span class="built_in">require</span>(<span class="string">'./TestOne.js'</span>);</span><br><span class="line"><span class="keyword">var</span> TestTwo = <span class="built_in">require</span>(<span class="string">'./TestTwo.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Main = React.createClass(&#123;</span><br><span class="line">    getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">          <span class="keyword">switch</span>: <span class="literal">true</span></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    _toggle() &#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">            <span class="keyword">switch</span>: !<span class="keyword">this</span>.state.switch</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;input type=<span class="string">"button"</span> onClick=&#123;<span class="keyword">this</span>._toggle&#125; value=<span class="string">"Press Me!"</span>/&gt;</span><br><span class="line">                &#123;<span class="keyword">this</span>.state.switch ? <span class="xml"><span class="tag">&lt;<span class="name">TestOne</span> /&gt;</span> : <span class="tag">&lt;<span class="name">TestTwo</span> /&gt;</span>&#125;</span></span><br><span class="line"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>      </span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">React.render(<span class="xml"><span class="tag">&lt;<span class="name">Main</span> /&gt;</span>, document.body);</span></span><br></pre></td></tr></table></figure>
-<h2 id="TestOne-js"><a href="#TestOne-js" class="headerlink" title="TestOne.js"></a>TestOne.js</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* TestOne.js */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TestOne = React.createClass(&#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="comment">/* jshint ignore: start*/</span></span><br><span class="line">            &lt;div&gt;Hello I am TestOne Component&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">            /</span>* jshint ignore: end*<span class="regexp">/</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">module.exports = TestOne;</span></span><br></pre></td></tr></table></figure>
-<h2 id="TestTwo-js"><a href="#TestTwo-js" class="headerlink" title="TestTwo.js"></a>TestTwo.js</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* TestTwo.js */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> TestTwo = React.createClass(&#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            <span class="comment">/* jshint ignore: start*/</span></span><br><span class="line">            &lt;h1&gt;Hello I am TestTwo Component&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">            /</span>* jshint ignore: end*<span class="regexp">/</span></span><br><span class="line"><span class="regexp">        );</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">module.exports = TestTwo;</span></span><br></pre></td></tr></table></figure>
-<h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack webpack-dev-server react-hot-loader babel-loader --save-dev</span><br><span class="line">npm install --save style-loader css-loader less-loader autoprefixer-loader</span><br></pre></td></tr></table></figure>
-<p>使用</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init  // 创建 package.json</span><br></pre></td></tr></table></figure>
-<p>首先，先到 <code>package.json</code> 內加入一個新 <code>dev</code> 的指令:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"webpack"</span>,</span><br><span class="line">    <span class="string">"dev"</span>: <span class="string">"webpack-dev-server --devtool eval --progress --colors --hot --content-base build"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>接著更新 <code>index.html</code>:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://localhost:8080/webpack-dev-server.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>编辑<code>webpack.config.js</code>为</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> config = &#123;</span><br><span class="line">    entry: [<span class="string">'webpack-dev-server/client?http://localhost:8080'</span>,</span><br><span class="line">		    <span class="string">'webpack/hot/only-dev-server'</span>,</span><br><span class="line">		    path.resolve(__dirname, <span class="string">'app/main.js'</span>)],</span><br><span class="line">    output: &#123;</span><br><span class="line">        path: path.resolve(__dirname, <span class="string">'build'</span>),</span><br><span class="line">        filename: <span class="string">'bundle.js'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="built_in">module</span>: &#123;</span><br><span class="line">	        loaders: [&#123;</span><br><span class="line">		        test: <span class="regexp">/\.js$/</span>,</span><br><span class="line">		        loaders: [<span class="string">'react-hot'</span>, <span class="string">'babel'</span>],</span><br><span class="line">		        include: path.join(__dirname, <span class="string">'app'</span>)</span><br><span class="line">		    &#125;,&#123;</span><br><span class="line">			    test: <span class="regexp">/\.less$/</span>,</span><br><span class="line">				loader: <span class="string">'style-loader!css-loader!autoprefixer-loader!less-loader'</span></span><br><span class="line">			&#125;</span><br><span class="line">	    ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">	    <span class="comment">//new webpack.HotModuleReplacementPlugin(),</span></span><br><span class="line">	    <span class="keyword">new</span> webpack.NoErrorsPlugin()</span><br><span class="line">	]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = config;</span><br></pre></td></tr></table></figure>
-<p>运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
-<p>访问 <a href="http://localhost:8080/webpack-dev-server/" target="_blank" rel="noopener">http://localhost:8080/webpack-dev-server/</a> 尝试是否跑起来</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Server</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="keyword">public</span> $redis;</span><br><span class="line">     <span class="keyword">public</span> $server;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//初始化函数</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//initServer</span></span><br><span class="line">    $server = <span class="keyword">new</span> swoole_http_server(</span><br><span class="line">    <span class="keyword">$this</span>-&gt;productConfig[<span class="string">"server"</span>][<span class="string">"host"</span>], </span><br><span class="line">    <span class="keyword">$this</span>-&gt;productConfig[<span class="string">"server"</span>][<span class="string">"port"</span>]);</span><br><span class="line">    $server-&gt;on(<span class="string">'request'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onRequest'</span>));</span><br><span class="line">    $server-&gt;on(<span class="string">'workerstart'</span>, <span class="keyword">array</span>(<span class="keyword">$this</span>, <span class="string">'onWorkerStart'</span>));</span><br><span class="line">    <span class="keyword">$this</span>-&gt;server = $server;</span><br><span class="line">    <span class="comment">//initRedis</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;redis = <span class="keyword">new</span> Redis();</span><br><span class="line">    <span class="keyword">$this</span>-&gt;redis-&gt;connect(<span class="keyword">$this</span>-&gt;productConfig[<span class="string">"redis"</span>][<span class="string">"host"</span>], </span><br><span class="line">    <span class="keyword">$this</span>-&gt;productConfig[<span class="string">"redis"</span>][<span class="string">"port"</span>]);  </span><br><span class="line">    $server-&gt;start();</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">//请求处理函数</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onRequest</span><span class="params">($request, $response)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//do some thing with redis</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;redis-&gt;get(<span class="string">"somekey"</span>);</span><br><span class="line">    $response-&gt;end(json_encode([<span class="string">"errno"</span> =&gt; <span class="number">0</span>]));</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">//worker进程创建函数</span></span><br><span class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onWorkerStart</span><span class="params">($serv, $workerId)</span> </span>&#123;&#125;</span><br><span class="line">  </span><br><span class="line">  $server = <span class="keyword">new</span> Server();</span><br><span class="line">  $init   = $server-&gt;init();</span><br><span class="line">  <span class="keyword">if</span> ($init[<span class="string">"errno"</span>] !== <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">die</span>(json_encode($init));</span><br><span class="line">  &#125; </span><br><span class="line">  $server-&gt;run();</span><br></pre></td></tr></table></figure>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><ul>
+<li>不在server中创建，而在<code>onRequest</code>中，接收到请求时创建简单粗暴的解决方案，每次收到请求时独立创建局部的redis连接，请求结束后释放。这种方式缺点很明显，连接没有复用，影响性能。</li>
+<li>在<code>onWorkerStart</code>中创建连接，并按<code>workerId</code>索引每个worker进程的redis连接。</li>
+</ul>
+<p>代码如下（主体代码参考上面），在Server中增加一个<code>redisPool</code>，worker启动时创建连接后注册到pool中。这样能保证每次请求时，使用的都是各进程独立的redis连接。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在Server类中增加$redisPool变量，初始化为空数组</span></span><br><span class="line"><span class="keyword">public</span> $redisPool = [];</span><br><span class="line"><span class="comment">//worker进程创建函数</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onWorkerStart</span><span class="params">($serv, $workerId)</span> </span>&#123;</span><br><span class="line">   $redis   = <span class="keyword">new</span> \Redis();</span><br><span class="line">   $tmpRes  = $redis-&gt;connect(</span><br><span class="line">     <span class="keyword">$this</span>-&gt;productConfig[<span class="string">"redis"</span>][<span class="string">"host"</span>], </span><br><span class="line">     <span class="keyword">$this</span>-&gt;productConfig[<span class="string">"redis"</span>][<span class="string">"port"</span>]</span><br><span class="line">   );  </span><br><span class="line">   <span class="keyword">if</span> ($tmpRes === <span class="keyword">false</span>) &#123;</span><br><span class="line">     <span class="keyword">$this</span>-&gt;logger-&gt;error(<span class="string">"Redis Init failed workerId:$workerId"</span>);</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"> $redis-&gt;setOption(</span><br><span class="line">   Redis::OPT_READ_TIMEOUT, </span><br><span class="line">   <span class="keyword">$this</span>-&gt;productConfig[<span class="string">"redis"</span>][<span class="string">"read_timeout"</span>]);</span><br><span class="line">   <span class="keyword">$this</span>-&gt;redisPool[$workerId] = $redis; <span class="comment">//将连接注册到pool中</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//请求处理函数</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onRequest</span><span class="params">($request, $response)</span> </span>&#123;</span><br><span class="line">   <span class="comment">//do some thing with redis</span></span><br><span class="line">   $redis = <span class="keyword">$this</span>-&gt;redisPool[<span class="keyword">$this</span>-&gt;server-&gt;worker_id];</span><br><span class="line">   $response-&gt;end(json_encode([<span class="string">"errno"</span> =&gt; <span class="number">0</span>]));</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="tcp协议包完整性"><a href="#tcp协议包完整性" class="headerlink" title="tcp协议包完整性"></a>tcp协议包完整性</h1><p><a href="https://wiki.swoole.com/wiki/page/50.html" target="_blank" rel="noopener">官方文档</a></p>
+<p><a href="http://blog.csdn.net/ldy3243942/article/details/40920743?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">Swoole的自定义协议功能的使用</a></p>
+<p>在默认情况下，使用swoole-server时（<code>TCP协议</code>），swoole不对包的进行完整性校验，在<code>onReceive</code>中接收到的包可能是不完整的，也有可能是多份数据。这是由于TCP协议的原理所造成的：</p>
+<blockquote>
+<p>TCP是一个流式协议。客户端向服务器发送的一段数据，可能并不会被服务器一次就完整的收到;客户端向服务器发送的多段数据，可能服务器一次就收到了全部的数据</p>
+</blockquote>
+<p>如下代码，在<code>onReceive</code>中接收到数据后，转给task进程进行处理，task进程处理结束后返回。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//请求处理（接收到客户端发送的数据）</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onReceive</span><span class="params">(swoole_server $serv, int $fd, int $from_id, string $data)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;logger-&gt;debug(<span class="string">"ReceiveMSG: "</span> . $data, [<span class="string">"fd"</span> =&gt; $fd]);</span><br><span class="line">    $params = [</span><br><span class="line">           <span class="string">"fd"</span>     =&gt; $fd,</span><br><span class="line">            <span class="string">"data"</span>   =&gt; $data</span><br><span class="line">    ];</span><br><span class="line">    $conInfo = $serv-&gt;connection_info($fd);</span><br><span class="line">    <span class="keyword">$this</span>-&gt;logger-&gt;debug(<span class="string">"conninfo fd:$fd "</span>, [<span class="string">"info"</span> =&gt; $conInfo]);</span><br><span class="line">    <span class="keyword">$this</span>-&gt;server-&gt;task($params);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 实际的task处理</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onTask</span><span class="params">($serv, $taskId, $srcWorkerId, $params)</span> </span>&#123;</span><br><span class="line">  $fd     = $params[<span class="string">"fd"</span>];</span><br><span class="line">  $sendRes = $serv-&gt;send($fd, <span class="string">"hehe\t0\t[]\n"</span>);</span><br><span class="line">  <span class="keyword">$this</span>-&gt;logger-&gt;debug(<span class="string">"conninfo-InTask fd:$fd "</span>, [<span class="string">"sendRes"</span> =&gt; $sendRes]);</span><br><span class="line">  $serv-&gt;close($fd);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//与客户端的连接被关闭</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onClose</span><span class="params">(swoole_server $server, int $fd, int $reactorId)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">$this</span>-&gt;logger-&gt;debug(<span class="string">"fd:$fd is Close"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行时（发送的数据比较大），有可能出现这样的日志。从日志里可以看到</p>
+<ol>
+<li><p>同一个server_fd(53)接收到了两份数据，两份数据来自同一个client_fd(22)</p>
+</li>
+<li><p>第一个task向客户端发送数据成功了，但是第二个发送失败（<code>sendRes：false</code>）<br><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fxnt5m1douj31y007y0zp.jpg" alt=""><br>实际打印出数据（在onReceive中），会发现客户端发送的数据被拆成了两份，因此触发了<code>两次onReceive</code>。<br> 第二个task中sendRes失败，是因为在处理第一份数据时，task中已经把客户端连接给关闭了。</p>
+</li>
+</ol>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p><strong>open_eof_check</strong></p>
+<p>使用Swoole提供的<code>open_eof_check</code>，保证数据包的完整性。</p>
+<blockquote>
+<p>此选项将检测客户端连接发来的数据，当数据包结尾是指定的字符串时才会投递给Worker进程。否则会一直拼接数据包，直到超过缓存区或者超时才会中止</p>
+</blockquote>
+<p>EOF即为数据的结束标记，具体由客户端使用的发送方式而定，比如Memcache协议以”<code>\r\n</code>”结尾，Java中BuffWriter.newLine()发送的数据在有可能是”<code>\n</code>“结尾，也有可能是”<code>\r\n</code>“。</p>
+<p>注意：==swoole的EOF检测不会从数据中间查找eof字符串，所以Worker进程可能会同时收到多个数据包，需要在应用层代码中自行explode(“\n”, $data) 来拆分==，1.7.15版本增加了<code>open_eof_split</code>，支持从数据中查找EOF，并切分数据。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'open_eof_check'</span> =&gt; <span class="keyword">true</span>, <span class="comment">//打开EOF检测</span></span><br><span class="line"><span class="string">'package_eof'</span>    =&gt; <span class="string">"\n"</span>, <span class="comment">//设置EOF</span></span><br></pre></td></tr></table></figure>
+<p><strong>手动拼接请求数据</strong></p>
+<p>默认情况下，同一个客户端fd会被分配到<code>同一个worker</code>中处理，所以数据可以拼接起来，当发现结尾是EOF字符时才进行处理。</p>
+<p>例如可以在全局数据中保存<code>一个数组buff</code>，接收到数据后进行拼接和判断。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$buff[$fd] .= $data;</span><br><span class="line"><span class="keyword">if</span> (substr($buff[$fd], <span class="number">-1</span>) == <span class="string">"\n"</span>) &#123;<span class="comment">//\n也可以是其他的EOF字符</span></span><br><span class="line">     <span class="comment">//数据完整，执行具体的逻辑</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="comment">//数据不完整，返回等待下次接收</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -537,9 +557,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Webpack/" rel="tag"># Webpack</a>
+            <a href="/tags/php/" rel="tag"># php</a>
           
-            <a href="/tags/ReactJs/" rel="tag"># ReactJs</a>
+            <a href="/tags/Swoole/" rel="tag"># Swoole</a>
+          
+            <a href="/tags/TCP/" rel="tag"># TCP</a>
           
         </div>
       
@@ -552,15 +574,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/07/17/ionic-hotcode/" rel="next" title="【Ionic】Ionic实现iOS与Android端代码『热更新』与android升级下载功能 （ v1.3.x版本 ）">
+                <i class="fa fa-chevron-left"></i> 【Ionic】Ionic实现iOS与Android端代码『热更新』与android升级下载功能 （ v1.3.x版本 ）
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/09/27/ionic-skill/" rel="prev" title="ionic技巧与坑">
-                ionic技巧与坑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -726,7 +748,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目模型"><span class="nav-number">1.</span> <span class="nav-text">项目模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建项目"><span class="nav-number">2.</span> <span class="nav-text">创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#main-js"><span class="nav-number">2.1.</span> <span class="nav-text">main.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TestOne-js"><span class="nav-number">2.2.</span> <span class="nav-text">TestOne.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TestTwo-js"><span class="nav-number">2.3.</span> <span class="nav-text">TestTwo.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">3.</span> <span class="nav-text">环境搭建</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多进程不能共用连接"><span class="nav-number">1.</span> <span class="nav-text">多进程不能共用连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">1.1.</span> <span class="nav-text">解决方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tcp协议包完整性"><span class="nav-number">2.</span> <span class="nav-text">tcp协议包完整性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决办法"><span class="nav-number">2.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -912,9 +934,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://kaibin.me/2015/06/10/webpack-reactjs-build/';
-        this.page.identifier = '2015/06/10/webpack-reactjs-build/';
-        this.page.title = '使用webpack搭建ReactJS环境安装流程';
+        this.page.url = 'http://kaibin.me/2017/04/25/swoole-multiple-processes/';
+        this.page.identifier = '2017/04/25/swoole-multiple-processes/';
+        this.page.title = '【Swoole】Swoole多进程不能共用连接&TCP协议包完整性';
         };
       function loadComments () {
         var d = document, s = d.createElement('script');

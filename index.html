@@ -364,6 +364,196 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kaibin.me/2017/04/25/swoole-multiple-processes/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kai">
+      <meta itemprop="description" content="Kai's Blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kai's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/04/25/swoole-multiple-processes/" class="post-title-link" itemprop="http://kaibin.me/index.html">【Swoole】Swoole多进程不能共用连接&TCP协议包完整性</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-04-25 11:20:33" itemprop="dateCreated datePublished" datetime="2017-04-25T11:20:33+08:00">2017-04-25</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/25/swoole-multiple-processes/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/25/swoole-multiple-processes/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope="" itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox" href="https://ws1.sinaimg.cn/large/006tNbRwgy1fxnsxg3jeej30go0a03yz.jpg" rel="gallery_cjp0v1g73000u8bmzzat834gc" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxnsxg3jeej30go0a03yz.jpg" itemprop="contentUrl">
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        
+          <h1 id="多进程不能共用连接"><a href="#多进程不能共用连接" class="headerlink" title="多进程不能共用连接"></a>多进程不能共用连接</h1><p><a href="https://wiki.swoole.com/wiki/page/325.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>其实这个是所有多进程、多线程程序都需要注意的问题，当进程or线程共享资源的时候，一定要考虑资源冲突，否则会出现各种诡异的问题（死锁、数据返回异常、连接被关闭等等等）。</p>
+<p>如下代码，在Swoole中，在server启动时创建了一个redis连接，在<code>onRequest</code>中使用。</p>
+<p>代码看上去没什么问题，但是实际使用时，如果压力很大，就会出现多进程抢占连接导致的问题。原因是因为创建的redis连接实际上是一个全局对象，每个work进程都在使用同一个连接。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/04/25/swoole-multiple-processes/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://kaibin.me/2016/07/17/ionic-hotcode/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -474,7 +664,7 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="http://y0.ifengimg.com/a/2015_47/ecbffbbcefbe336.jpg" rel="gallery_cjp0tog9b0009twmzuk5i0ku2" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+              <a class="post-gallery-img fancybox" href="http://y0.ifengimg.com/a/2015_47/ecbffbbcefbe336.jpg" rel="gallery_cjp0v1g72000s8bmzzjwgs0zs" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://y0.ifengimg.com/a/2015_47/ecbffbbcefbe336.jpg" itemprop="contentUrl">
               </a>
             
@@ -662,7 +852,7 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="https://ws4.sinaimg.cn/large/006tNbRwgy1fxnkm24sn2j312306775o.jpg" rel="gallery_cjp0tog960007twmz1tucpylq" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+              <a class="post-gallery-img fancybox" href="https://ws4.sinaimg.cn/large/006tNbRwgy1fxnkm24sn2j312306775o.jpg" rel="gallery_cjp0v1g5p00018bmzhqhbzbd3" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fxnkm24sn2j312306775o.jpg" itemprop="contentUrl">
               </a>
             
@@ -851,7 +1041,7 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="http://ionicframework.com/img/angular-ionic.png" rel="gallery_cjp0tog8w0001twmzsu9q5790" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+              <a class="post-gallery-img fancybox" href="http://ionicframework.com/img/angular-ionic.png" rel="gallery_cjp0v1g5v00028bmz40kg05gk" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://ionicframework.com/img/angular-ionic.png" itemprop="contentUrl">
               </a>
             
@@ -1045,7 +1235,7 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="http://ionicframework.com/img/native.png" rel="gallery_cjp0tog900003twmzfpjyyjd1" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+              <a class="post-gallery-img fancybox" href="http://ionicframework.com/img/native.png" rel="gallery_cjp0v1g5y00058bmz8sk4yha4" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://ionicframework.com/img/native.png" itemprop="contentUrl">
               </a>
             
@@ -1233,7 +1423,7 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="https://camo.githubusercontent.com/ebc085019011ababb0d35024824304831c7dc72a/68747470733a2f2f7765627061636b2e6769746875622e696f2f6173736574732f6c6f676f2e706e67" rel="gallery_cjp0tog980008twmza6fn8e5b" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+              <a class="post-gallery-img fancybox" href="https://camo.githubusercontent.com/ebc085019011ababb0d35024824304831c7dc72a/68747470733a2f2f7765627061636b2e6769746875622e696f2f6173736574732f6c6f676f2e706e67" rel="gallery_cjp0v1g75000x8bmzezp6m79o" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="https://camo.githubusercontent.com/ebc085019011ababb0d35024824304831c7dc72a/68747470733a2f2f7765627061636b2e6769746875622e696f2f6173736574732f6c6f676f2e706e67" itemprop="contentUrl">
               </a>
             
@@ -1339,7 +1529,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1387,7 +1577,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

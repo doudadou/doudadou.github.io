@@ -121,7 +121,7 @@
 <meta property="og:description" content="应用Build时报错 Cordova app failing to Archive with Xcode 7.1 (Cordova/CDVViewController.h file not found)解决方法加入这行命令在 Build Settings -&amp;gt; Header Search Paths: 1&quot;$(OBJROOT)/UninstalledProducts/$(PLATFORM_N">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ionicframework.com/img/native.png">
-<meta property="og:updated_time" content="2018-11-28T03:02:10.133Z">
+<meta property="og:updated_time" content="2018-11-28T06:57:49.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ionic技巧与坑">
 <meta name="twitter:description" content="应用Build时报错 Cordova app failing to Archive with Xcode 7.1 (Cordova/CDVViewController.h file not found)解决方法加入这行命令在 Build Settings -&amp;gt; Header Search Paths: 1&quot;$(OBJROOT)/UninstalledProducts/$(PLATFORM_N">
@@ -483,7 +483,7 @@
           
           
             <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox" href="http://ionicframework.com/img/native.png" rel="gallery_cjp0lw0e90002hamzywlfxvbx" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+              <a class="post-gallery-img fancybox" href="http://ionicframework.com/img/native.png" rel="gallery_cjp0tog900003twmzfpjyyjd1" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://ionicframework.com/img/native.png" itemprop="contentUrl">
               </a>
             
@@ -497,9 +497,8 @@
       
         <h2 id="应用Build时报错-Cordova-app-failing-to-Archive-with-Xcode-7-1-Cordova-CDVViewController-h-file-not-found"><a href="#应用Build时报错-Cordova-app-failing-to-Archive-with-Xcode-7-1-Cordova-CDVViewController-h-file-not-found" class="headerlink" title="应用Build时报错 Cordova app failing to Archive with Xcode 7.1 (Cordova/CDVViewController.h file not found)"></a>应用Build时报错 Cordova app failing to Archive with Xcode 7.1 (Cordova/CDVViewController.h file not found)</h2><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>加入这行命令在 <code>Build Settings -&gt; Header Search Paths</code>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"<span class="variable">$(OBJROOT)</span>/UninstalledProducts/<span class="variable">$(PLATFORM_NAME)</span>/include"</span></span><br></pre></td></tr></table></figure>
-<h2 id="Ionic-IOS9访问http受到限制"><a href="#Ionic-IOS9访问http受到限制" class="headerlink" title="Ionic IOS9访问http受到限制"></a>Ionic IOS9访问http受到限制</h2><h3 id="错误："><a href="#错误：" class="headerlink" title="错误："></a>错误：</h3><blockquote>
-<p>Application Transport Security has blocked a cleartext HTTP (http\://) resource load since it is insecure. Temporary exceptions can be configured via your app’s Info.plist file.    </p>
-</blockquote>
+<a id="more"></a>
+<h2 id="Ionic-IOS9访问http受到限制"><a href="#Ionic-IOS9访问http受到限制" class="headerlink" title="Ionic IOS9访问http受到限制"></a>Ionic IOS9访问http受到限制</h2><h3 id="错误："><a href="#错误：" class="headerlink" title="错误："></a>错误：</h3><p><code>Application Transport Security has blocked a cleartext HTTP (http\://) resource load since it is insecure. Temporary exceptions can be configured via your app&#39;s Info.plist file.</code></p>
 <h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><p>手动在 <code>项目名-Info.plist</code>第一个<code>&lt;dict&gt;</code>标签下添加下面标签</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAppTransportSecurity<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">key</span>&gt;</span>NSAllowsArbitraryLoads<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="cordova-插件使用命令"><a href="#cordova-插件使用命令" class="headerlink" title="cordova 插件使用命令"></a>cordova 插件使用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//安装插件</span><br><span class="line">cordova plugin add org.apache.cordova.device</span><br><span class="line"></span><br><span class="line">//查看插件列表</span><br><span class="line">cordova plugin list</span><br><span class="line"></span><br><span class="line">//删除插件</span><br><span class="line">cordova plugin remove org.apache.cordova.device</span><br></pre></td></tr></table></figure>
@@ -509,7 +508,6 @@
 <blockquote>
 <p>加入id 索引值来区分多个modal</p>
 </blockquote>
-<a id="more"></a>
 <h2 id="使Chrome和Chromium实现跨域请求"><a href="#使Chrome和Chromium实现跨域请求" class="headerlink" title="使Chrome和Chromium实现跨域请求"></a>使Chrome和Chromium实现跨域请求</h2><p>通过命令行启动:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">open -a <span class="string">"Google Chrome"</span> --args --<span class="built_in">disable</span>-web-security</span><br><span class="line">open -a <span class="string">"Chromium"</span> --args --<span class="built_in">disable</span>-web-security</span><br></pre></td></tr></table></figure>
 <h2 id="cordova-ionic-emulate-时选择模拟器版本（iOS）"><a href="#cordova-ionic-emulate-时选择模拟器版本（iOS）" class="headerlink" title="cordova/ionic emulate 时选择模拟器版本（iOS）"></a>cordova/ionic emulate 时选择模拟器版本（iOS）</h2><p>在项目的根目录下：</p>
@@ -646,7 +644,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -690,7 +688,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

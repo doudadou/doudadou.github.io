@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="热更新的好处通常ionic源码可包括（HTML，JavaScript，CSS文件和其他资源），往常我们必须通过提交程序到应用市场，经过漫长的审核后才可让用户更新，每改动一个小地方都需要重新打新版本。 现在ionic通过使用cordova插件cordova-hot-code-push实现实现iOS与Android端代码『热更新』功能，可不必发布应用市场经平台审核，便可动态更新App源码的目的。">
+<meta name="keywords" content="ionic,iOS,Android,cordova,热更新,升级下载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Ionic】Ionic实现iOS与Android端代码『热更新』与android升级下载功能 （ v1.3.x版本 ）">
+<meta property="og:url" content="http://kaibin.me/2016/07/17/ionic-hotcode/index.html">
+<meta property="og:site_name" content="Kai&#39;s Blog">
+<meta property="og:description" content="热更新的好处通常ionic源码可包括（HTML，JavaScript，CSS文件和其他资源），往常我们必须通过提交程序到应用市场，经过漫长的审核后才可让用户更新，每改动一个小地方都需要重新打新版本。 现在ionic通过使用cordova插件cordova-hot-code-push实现实现iOS与Android端代码『热更新』功能，可不必发布应用市场经平台审核，便可动态更新App源码的目的。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://y0.ifengimg.com/a/2015_47/ecbffbbcefbe336.jpg">
+<meta property="og:updated_time" content="2018-11-28T06:53:33.336Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【Ionic】Ionic实现iOS与Android端代码『热更新』与android升级下载功能 （ v1.3.x版本 ）">
+<meta name="twitter:description" content="热更新的好处通常ionic源码可包括（HTML，JavaScript，CSS文件和其他资源），往常我们必须通过提交程序到应用市场，经过漫长的审核后才可让用户更新，每改动一个小地方都需要重新打新版本。 现在ionic通过使用cordova插件cordova-hot-code-push实现实现iOS与Android端代码『热更新』功能，可不必发布应用市场经平台审核，便可动态更新App源码的目的。">
+<meta name="twitter:image" content="http://y0.ifengimg.com/a/2015_47/ecbffbbcefbe336.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://kaibin.me/2016/07/17/ionic-hotcode/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【Ionic】Ionic实现iOS与Android端代码『热更新』与android升级下载功能 （ v1.3.x版本 ） | Kai's Blog</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3bf7d76b7f741514e89cbccbfab85c2d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kai's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Yesterday you said tomorrow.</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://kaibin.me/2016/07/17/ionic-hotcode/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kai">
+      <meta itemprop="description" content="Kai's Blog">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kai's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【Ionic】Ionic实现iOS与Android端代码『热更新』与android升级下载功能 （ v1.3.x版本 ）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-07-17 14:46:56" itemprop="dateCreated datePublished" datetime="2016-07-17T14:46:56+08:00">2016-07-17</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/code/" itemprop="url" rel="index"><span itemprop="name">code</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/17/ionic-hotcode/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/17/ionic-hotcode/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope="" itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox" href="http://y0.ifengimg.com/a/2015_47/ecbffbbcefbe336.jpg" rel="gallery_cjp0tog9b0009twmzuk5i0ku2" itemscope="" itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://y0.ifengimg.com/a/2015_47/ecbffbbcefbe336.jpg" itemprop="contentUrl">
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="热更新的好处"><a href="#热更新的好处" class="headerlink" title="热更新的好处"></a>热更新的好处</h1><p>通常ionic源码可包括（HTML，JavaScript，CSS文件和其他资源），往常我们必须通过提交程序到应用市场，经过漫长的审核后才可让用户更新，每改动一个小地方都需要重新打新版本。</p>
+<p>现在ionic通过使用cordova插件cordova-hot-code-push实现实现iOS与Android端代码『热更新』功能，可不必发布应用市场经平台审核，便可动态更新App源码的目的。</p>
+<a id="more"></a>
+<h1 id="热更新实现原理"><a href="#热更新实现原理" class="headerlink" title="热更新实现原理"></a>热更新实现原理</h1><p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxnmylv0zyj30qo0k0abq.jpg" alt=""></p>
+<h1 id="基础实现方法"><a href="#基础实现方法" class="headerlink" title="基础实现方法"></a>基础实现方法</h1><h2 id="1、安装-cordova-hot-code-push-cli"><a href="#1、安装-cordova-hot-code-push-cli" class="headerlink" title="1、安装 cordova-hot-code-push-cli"></a>1、安装 cordova-hot-code-push-cli</h2><p>使用命令安装</p>
+<pre><code>npm install -g cordova-hot-code-push-cli
+</code></pre><p>主要是生成检测配置文件，通常是在 www 目录下动态生成 chcp.json 和 chcp.manifest 生成两个文件，插件源码地址：</p>
+<p><a href="https://github.com/nordnet/cordova-hot-code-push" target="_blank" rel="noopener">https://github.com/nordnet/cordova-hot-code-push</a></p>
+<h2 id="2、创建项目"><a href="#2、创建项目" class="headerlink" title="2、创建项目"></a>2、创建项目</h2><p>包含 www 目录的项目，已有项目无需重新创建</p>
+<h2 id="3、安装热更新插件"><a href="#3、安装热更新插件" class="headerlink" title="3、安装热更新插件"></a>3、安装热更新插件</h2><p>使用命令安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ionic plugin add cordova-hot-code-push-pluginionic plugin add cordova-hot-code-push-local-dev-addon</span><br></pre></td></tr></table></figure>
+<h2 id="4、打包封装"><a href="#4、打包封装" class="headerlink" title="4、打包封装"></a>4、打包封装</h2><p>执行命令<code>cordova-hcp build</code> 或者 <code>cordova build</code></p>
+<h2 id="5、启动-hcp-server-服务"><a href="#5、启动-hcp-server-服务" class="headerlink" title="5、启动 hcp server 服务"></a>5、启动 hcp server 服务</h2><p>重新打开一个终端窗口，cd到项目目录（包含www目录的父级目录）执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova-hcp server</span><br></pre></td></tr></table></figure>
+<p>稍等会在 www 目录下动态生成 chcp.json 和 chcp.manifest 生成两个文件</p>
+<h2 id="6、正常在运行完成前4步以后会在我们config-xml动态加入如图所示链接地址"><a href="#6、正常在运行完成前4步以后会在我们config-xml动态加入如图所示链接地址" class="headerlink" title="6、正常在运行完成前4步以后会在我们config.xml动态加入如图所示链接地址"></a>6、正常在运行完成前4步以后会在我们config.xml动态加入如图所示链接地址</h2><p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fxnrw3yiawj307e08hq3m.jpg" alt=""><br><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fxnrx40w4nj30m507wjun.jpg" alt=""><br>图中链接地址<a href="https://1980480f.ngrok.io/chcp.json" target="_blank" rel="noopener">https://1980480f.ngrok.io/chcp.json</a>，修改为在第8步www目录里chcp.json文件可访问的地址：</p>
+<p>例如：<a href="http://kaibin.me/hotcode/chcp.json">http://kaibin.me/hotcode/chcp.json</a></p>
+<h2 id="7、运行代码或打包我们的App"><a href="#7、运行代码或打包我们的App" class="headerlink" title="7、运行代码或打包我们的App"></a>7、运行代码或打包我们的App</h2><h2 id="8、修改我们想要更新的代码"><a href="#8、修改我们想要更新的代码" class="headerlink" title="8、修改我们想要更新的代码"></a>8、修改我们想要更新的代码</h2><p>然后修改 chcp.json 文件的 content_url ，此地址为我们项目放置的地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"autogenerated"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="string">"release"</span>: <span class="string">"2016.07.17-11.36.13"</span>,</span><br><span class="line">  <span class="string">"content_url"</span>: <span class="string">"http://kaibin.me/hotcode"</span>,</span><br><span class="line">  <span class="string">"update"</span>: <span class="string">"now"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="9、将项目www目录代码上传到服务器可访问的目录里"><a href="#9、将项目www目录代码上传到服务器可访问的目录里" class="headerlink" title="9、将项目www目录代码上传到服务器可访问的目录里"></a>9、将项目www目录代码上传到服务器可访问的目录里</h2><p>例如在服务器根目录创建hotcode命名的目录将项目www里的文件上传上去</p>
+<h2 id="10、-关闭我们的应用重新打开，看看代码是否更新成功"><a href="#10、-关闭我们的应用重新打开，看看代码是否更新成功" class="headerlink" title="10、 关闭我们的应用重新打开，看看代码是否更新成功"></a>10、 关闭我们的应用重新打开，看看代码是否更新成功</h2><h1 id="优化流程"><a href="#优化流程" class="headerlink" title="优化流程"></a>优化流程</h1><h2 id="1-创建cordova-hcp模板"><a href="#1-创建cordova-hcp模板" class="headerlink" title="1.创建cordova-hcp模板"></a>1.创建cordova-hcp模板</h2><p>线上测试可卸载掉 cordova-hot-code-push-local-dev-addon防止每次自动更新新版本，可通过命令卸载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova plugin remove cordova-hot-code-push-local-dev-addon</span><br></pre></td></tr></table></figure>
+<p>可以在 cordova 项目根目录下放一个 cordova-hcp.json，这是个模板文件</p>
+<p>这样每次执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cordova-hcp build</span><br></pre></td></tr></table></figure>
+<p>就会利用这个模板生成新的 <code>chcp.json</code>，而不用手动更改 <code>www/chcp.json</code>了。</p>
+<p>cordova-hcp.json内容如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"autogenerated"</span>: <span class="literal">true</span>, <span class="attr">"content_url"</span>: <span class="string">"http://kaibin.me/hotcode"</span>,</span><br><span class="line">"min_native_interface": 1, // app内核版本号</span><br><span class="line">"ios_identifier": "https://itunes.apple.com/cn/app/***", // iOS上线后的地址，用于内核版本更新后的确认跳转</span><br><span class="line">"update": "now"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-Build-options-build设置，配置开发环境、测试环境与生产环境"><a href="#2-Build-options-build设置，配置开发环境、测试环境与生产环境" class="headerlink" title="2.Build options build设置，配置开发环境、测试环境与生产环境"></a>2.Build options build设置，配置开发环境、测试环境与生产环境</h2><ul>
+<li>在 /Cordova/Testproject/ 下创建 chcpbuild.options 文件，文件内容如下:</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"dev"</span>: &#123;</span><br><span class="line"><span class="attr">"config-file"</span>: <span class="string">"https://dev.kaibin.me/hotcode/www/chcp.json"</span>  &#125;,</span><br><span class="line"><span class="attr">"production"</span>:&#123;</span><br><span class="line">  <span class="attr">"config-file"</span>:</span><br><span class="line">  <span class="string">"https://kaibin.me/hotcode/chcp.json"</span></span><br><span class="line">&#125;,</span><br><span class="line">  <span class="attr">"QA"</span>: &#123;</span><br><span class="line">  <span class="attr">"config-file"</span>:<span class="string">"https://test.kaibin.me/hotcode/chcp.json"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样在build app的时候, 转为开发要用的服务器, 可执行:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ionic build -- chcp-dev</span><br></pre></td></tr></table></figure>
+<p>结果就是, 特定拍下的 config.xml 文件(比如, /Cordova/TestProject/platforms/android/res/xml/config.xml) 变成了这样:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;chcp&gt;</span><br><span class="line">&lt;config-file url=<span class="string">"https://dev.kaibin.me/hotcode/chcp.json"</span>/&gt;&lt;/chcp&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当我们需要上架app的时候 (Google Play, App Store) - 我们正常build:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ionic build --release</span><br></pre></td></tr></table></figure>
+<p>这样 config.xml 不会改变</p>
+<p>如果没有使用 chcpbuild.options 插件会使用 config.xml 里面默认的值。</p>
+<p>文件必须位于 Cordova 项目根目录. 在这个文件里面，指定(JSON格式) 所有想改变 config.xml 文件的配置，源文件 config.xml (Cordova项目根目录) 不会发生变动, 改变的是 特定平台下的 config.xml (在cordova build过程的 after_prepare 阶段)。</p>
+<h2 id="通过min-native-interface监控app是否提示更新"><a href="#通过min-native-interface监控app是否提示更新" class="headerlink" title="通过min_native_interface监控app是否提示更新"></a>通过min_native_interface监控app是否提示更新</h2><p>所需最小的外壳app版本. 这是app的build版本号，是个整型数字, 不是应用商店中看到的形如”1.0.0”字符串。</p>
+<p>在 config.xml中，这样指定build版本号:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;chcp&gt;</span><br><span class="line">&lt;native-interface version=<span class="string">"1"</span>/&gt;</span><br><span class="line">&lt;config-file url=<span class="string">"http://kaibin.me/hotcode/chcp.json"</span>/&gt;&lt;/chcp&gt;</span><br></pre></td></tr></table></figure>
+<p>与www目录下的chcp.json里面的min_native_interface数值相对应</p>
+<p>例如：app外壳里的config.xml是这样的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;chcp&gt;</span><br><span class="line">&lt;native-interface version=<span class="string">"1"</span>/&gt;</span><br><span class="line">&lt;config-file url=<span class="string">"http://kaibin.me/hotcode/chcp.json"</span>/&gt;&lt;/chcp&gt;</span><br></pre></td></tr></table></figure>
+<p>若服务器里的min_native_interface也对应是1，不会出现提示用户升级的状态，正常修改www目录的内容通过更新release值，可实现热更新。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"autogenerated"</span>: <span class="literal">true</span>,</span><br><span class="line">"content_url": "http://kaibin.me/hotcode",  "min_native_interface": 1, // app内核版本号 "ios_identifier": "https://itunes.apple.com/cn/app/***", // iOS上线后的地址，用于内核版本更新后的确认跳转</span><br><span class="line">"release": "2017.07.17-12.22.11",</span><br><span class="line">"update": "now"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假设你的外壳app加了个新的插件，应该会更新外壳app。为了防止用户通过热更新下载了不适合他现有外壳app的web内容，你应该设置 min_native_interface 这个值</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"autogenerated"</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="attr">"content_url"</span>: <span class="string">"http://kaibin.me/hotcode"</span>,</span><br><span class="line">"min_native_interface": 1, // app内核版本号</span><br><span class="line">"ios_identifier": "https://itunes.apple.com/cn/app/***", // iOS上线后的地址，用于内核版本更新后的确认跳转</span><br><span class="line">"release": "2017.07.17-12.28.21",</span><br><span class="line">"min_native_interface": 2，</span><br><span class="line">"update": "now"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>插件加载到这段json的时候, 发现 min_native_interface 比当前外壳app的build号要大，便不会下载web内容。而是触发一个chcp_updateLoadFailed 错误通知, 告诉用户需要升级外壳app了。</p>
+<h3 id="chcp-json中update字段含义"><a href="#chcp-json中update字段含义" class="headerlink" title="chcp.json中update字段含义"></a>chcp.json中update字段含义</h3><p>指定了什么时候安装web内容更新，支持的值有：</p>
+<blockquote>
+<p>start - app启动时安装更新，默认值</p>
+<p>resume - app从后台切换过来的时候安装更新</p>
+<p>now - web内容下载完毕即安装更新</p>
+</blockquote>
+<h1 id="引导用户去应用商店更新外壳app或下载新版本"><a href="#引导用户去应用商店更新外壳app或下载新版本" class="headerlink" title="引导用户去应用商店更新外壳app或下载新版本"></a>引导用户去应用商店更新外壳app或下载新版本</h1><p>通过给web更新设置最小支持的外壳app版本 min_native_interface。 如果插件检查发现用户安装的外壳app版本比服务端新的web内容要求的版本要低，就会触发错误事件，错误码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcp.error.APPLICATION_BUILD_VERSION_TOO_LOW</span><br></pre></td></tr></table></figure>
+<p>通过这个错误码可通过弹窗提示用户去升级，跳转到AppStore或下载新安装包（国内因GFW，跳转到google应用商店就算了＝ ＝）</p>
+<ul>
+<li>chcp.json 里增加min_native_interface的值</li>
+<li>js端监听相应事件，并在出现错误的时候调用 chcp.requestApplicationUpdate 方法</li>
+<li><a href="https://github.com/apache/cordova-plugin-file" target="_blank" rel="noopener">cordova-plugin-file</a>，<a href="https://github.com/apache/cordova-plugin-file-transfer" target="_blank" rel="noopener">cordova-plugin-file-transfer</a>，<a href="https://github.com/pwlin/cordova-plugin-file-opener2" target="_blank" rel="noopener">cordova-plugin-file-opener2</a>先把这几个插件安装好</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> appUpdate = &#123;</span><br><span class="line">        <span class="comment">// Application Constructor</span></span><br><span class="line">        initialize: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.bindEvents();</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// Bind any events that are required.</span></span><br><span class="line">        <span class="comment">// Usually you should subscribe on 'deviceready' event to know, when you can start calling cordova modules</span></span><br><span class="line">        bindEvents: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">document</span>.addEventListener(<span class="string">'deviceready'</span>, <span class="keyword">this</span>.onDeviceReady, <span class="literal">false</span>);</span><br><span class="line">            <span class="built_in">document</span>.addEventListener(<span class="string">'chcp_updateLoadFailed'</span>, <span class="keyword">this</span>.onUpdateLoadError, <span class="literal">false</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// deviceready Event Handler</span></span><br><span class="line">        onDeviceReady: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        &#125;,</span><br><span class="line">        onUpdateLoadError: <span class="function"><span class="keyword">function</span>(<span class="params">eventData</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> error = eventData.detail.error;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 当检测出内核版本过小</span></span><br><span class="line">            <span class="keyword">if</span> (error &amp;&amp; error.code == chcp.error.APPLICATION_BUILD_VERSION_TOO_LOW) &#123;</span><br><span class="line">                <span class="keyword">var</span> dialogMessage = <span class="string">'有新的版本,请下载更新'</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// iOS端 直接弹窗提示升级，点击ok后自动跳转</span></span><br><span class="line">                <span class="keyword">if</span>(ionic.Platform.isIOS())&#123;</span><br><span class="line">                    chcp.requestApplicationUpdate(dialogMessage, <span class="keyword">this</span>.userWentToStoreCallback, <span class="keyword">this</span>.userDeclinedRedirectCallback);</span><br><span class="line">                <span class="comment">// Android端 提示升级下载最新APK文件</span></span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(ionic.Platform.isAndroid())&#123;</span><br><span class="line">                    <span class="keyword">var</span> confirmPopup = $ionicPopup.confirm(&#123;</span><br><span class="line">                        template: <span class="string">'有新的版本,请下载更新'</span>,</span><br><span class="line">                        cssClass: <span class="string">'popup'</span>,</span><br><span class="line">                        cancelText:<span class="string">'取消'</span>,</span><br><span class="line">                        okText:<span class="string">'升级'</span></span><br><span class="line">                    &#125;);</span><br><span class="line">                    confirmPopup.then(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                        <span class="keyword">if</span> (res) &#123;</span><br><span class="line">                            $ionicLoading.show(&#123;</span><br><span class="line">                                template: <span class="string">"已经下载：0%"</span></span><br><span class="line">                            &#125;);</span><br><span class="line">                            <span class="built_in">window</span>.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, <span class="function"><span class="keyword">function</span>(<span class="params">fileEntry</span>) </span>&#123;</span><br><span class="line">                                fileEntry.getDirectory(<span class="string">"***(app名称)"</span>, &#123; <span class="attr">create</span>: <span class="literal">true</span>, <span class="attr">exclusive</span>: <span class="literal">false</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">fileEntry</span>) </span>&#123;</span><br><span class="line">                                    <span class="comment">//下载代码</span></span><br><span class="line">                                    <span class="keyword">var</span> fileTransfer = <span class="keyword">new</span> FileTransfer();</span><br><span class="line">                                    fileTransfer.download(<span class="string">"app下载地址"</span>, fileEntry.toInternalURL()+<span class="string">"***(app名称).apk"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">entry</span>) </span>&#123;</span><br><span class="line">                                        <span class="comment">// 打开下载下来的APP</span></span><br><span class="line">                                        cordova.plugins.fileOpener2.open(</span><br><span class="line">                                            entry.toInternalURL(),<span class="comment">//下载文件保存地址</span></span><br><span class="line">                                            <span class="string">'application/vnd.android.package-archive'</span>, &#123;<span class="comment">//以APK文件方式打开</span></span><br><span class="line">                                                error: <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                                                &#125;,</span><br><span class="line">                                                success: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">                                            &#125;);</span><br><span class="line">                                    &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                                    &#125;,<span class="literal">true</span>);</span><br><span class="line">                                    fileTransfer.onprogress = <span class="function"><span class="keyword">function</span>(<span class="params">progressEvent</span>) </span>&#123;</span><br><span class="line">                                        $timeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                                            <span class="keyword">var</span> downloadProgress = (progressEvent.loaded / progressEvent.total) * <span class="number">100</span>;</span><br><span class="line">                                            $ionicLoading.show(&#123;</span><br><span class="line">                                                template: <span class="string">"已经下载："</span> + <span class="built_in">Math</span>.floor(downloadProgress) + <span class="string">"%"</span></span><br><span class="line">                                            &#125;);</span><br><span class="line">                                            <span class="keyword">if</span> (downloadProgress &gt; <span class="number">99</span>) &#123;</span><br><span class="line">                                                $ionicLoading.hide();</span><br><span class="line">                                            &#125;</span><br><span class="line">                                        &#125;);</span><br><span class="line">                                    &#125;;</span><br><span class="line">                                &#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;alert(<span class="string">"创建失败"</span>)&#125;);</span><br><span class="line">                            &#125;);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        userWentToStoreCallback: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">// user went to the store from the dialog</span></span><br><span class="line">        &#125;,</span><br><span class="line">        userDeclinedRedirectCallback: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">// User didn't want to leave the app.</span></span><br><span class="line">            <span class="comment">// Maybe he will update later.</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    appUpdate.initialize();</span><br></pre></td></tr></table></figure>
+<h1 id="iOS与Android的出现的问题"><a href="#iOS与Android的出现的问题" class="headerlink" title="iOS与Android的出现的问题"></a>iOS与Android的出现的问题</h1><p>在build ios的app时config.xml的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;name&gt;***&lt;/name&gt;</span><br></pre></td></tr></table></figure>
+<p>name不可使用中文，设置app名称为中文，可通过Xcode修改Resources目录下的<code>***-Info.plist</code>内的<code>Bundle display name</code>字段即可</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ionic/" rel="tag"># ionic</a>
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/cordova/" rel="tag"># cordova</a>
+          
+            <a href="/tags/热更新/" rel="tag"># 热更新</a>
+          
+            <a href="/tags/升级下载/" rel="tag"># 升级下载</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/17/react-native-build/" rel="next" title="Mac平台 ReactNative iOS&Android 开发环境搭建总结">
+                <i class="fa fa-chevron-left"></i> Mac平台 ReactNative iOS&Android 开发环境搭建总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Kai</p>
+              <p class="site-description motion-element" itemprop="description">Kai's Blog</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#热更新的好处"><span class="nav-number">1.</span> <span class="nav-text">热更新的好处</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#热更新实现原理"><span class="nav-number">2.</span> <span class="nav-text">热更新实现原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础实现方法"><span class="nav-number">3.</span> <span class="nav-text">基础实现方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、安装-cordova-hot-code-push-cli"><span class="nav-number">3.1.</span> <span class="nav-text">1、安装 cordova-hot-code-push-cli</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、创建项目"><span class="nav-number">3.2.</span> <span class="nav-text">2、创建项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、安装热更新插件"><span class="nav-number">3.3.</span> <span class="nav-text">3、安装热更新插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、打包封装"><span class="nav-number">3.4.</span> <span class="nav-text">4、打包封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、启动-hcp-server-服务"><span class="nav-number">3.5.</span> <span class="nav-text">5、启动 hcp server 服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、正常在运行完成前4步以后会在我们config-xml动态加入如图所示链接地址"><span class="nav-number">3.6.</span> <span class="nav-text">6、正常在运行完成前4步以后会在我们config.xml动态加入如图所示链接地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、运行代码或打包我们的App"><span class="nav-number">3.7.</span> <span class="nav-text">7、运行代码或打包我们的App</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、修改我们想要更新的代码"><span class="nav-number">3.8.</span> <span class="nav-text">8、修改我们想要更新的代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、将项目www目录代码上传到服务器可访问的目录里"><span class="nav-number">3.9.</span> <span class="nav-text">9、将项目www目录代码上传到服务器可访问的目录里</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、-关闭我们的应用重新打开，看看代码是否更新成功"><span class="nav-number">3.10.</span> <span class="nav-text">10、 关闭我们的应用重新打开，看看代码是否更新成功</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化流程"><span class="nav-number">4.</span> <span class="nav-text">优化流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-创建cordova-hcp模板"><span class="nav-number">4.1.</span> <span class="nav-text">1.创建cordova-hcp模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Build-options-build设置，配置开发环境、测试环境与生产环境"><span class="nav-number">4.2.</span> <span class="nav-text">2.Build options build设置，配置开发环境、测试环境与生产环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过min-native-interface监控app是否提示更新"><span class="nav-number">4.3.</span> <span class="nav-text">通过min_native_interface监控app是否提示更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chcp-json中update字段含义"><span class="nav-number">4.3.1.</span> <span class="nav-text">chcp.json中update字段含义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引导用户去应用商店更新外壳app或下载新版本"><span class="nav-number">5.</span> <span class="nav-text">引导用户去应用商店更新外壳app或下载新版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iOS与Android的出现的问题"><span class="nav-number">6.</span> <span class="nav-text">iOS与Android的出现的问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kai</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/reading_progress/reading_progress.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://kaibin.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://kaibin.me/2016/07/17/ionic-hotcode/';
+        this.page.identifier = '2016/07/17/ionic-hotcode/';
+        this.page.title = '【Ionic】Ionic实现iOS与Android端代码『热更新』与android升级下载功能 （ v1.3.x版本 ）';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://kaibin.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        $(function () {
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          if (offsetTop <= 0) {
+            // load directly when there's no a scrollbar
+            loadComments();
+          } else {
+            $(window).on('scroll.disqus_scroll', function () {
+              // offsetTop may changes because of manually resizing browser window or lazy loading images.
+              var offsetTop = $('#comments').offset().top - $(window).height();
+              var scrollTop = $(window).scrollTop();
+
+              // pre-load comments a bit? (margin or anything else)
+              if (offsetTop - scrollTop < 60) {
+                $(window).off('.disqus_scroll');
+                loadComments();
+              }
+            });
+          }
+        });
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+    
+      flOptions = {};
+      
+          flOptions.iconStyle = "box";
+      
+          flOptions.boxForm = "horizontal";
+      
+          flOptions.position = "middleRight";
+      
+          flOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

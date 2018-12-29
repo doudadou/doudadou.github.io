@@ -3,6 +3,33 @@
   
     
     <entry>
+      <title>Flutter常见错误解决方法（持续更新...）</title>
+      <link href="/2018/12/28/flutter-skill/"/>
+      <url>/2018/12/28/flutter-skill/</url>
+      
+        <content type="html"><![CDATA[<h2 id="初始时：Exception-in-thread-“main”-java-util-zip-ZipException-error-in-opening-zip-file"><a href="#初始时：Exception-in-thread-“main”-java-util-zip-ZipException-error-in-opening-zip-file" class="headerlink" title="初始时：Exception in thread “main” java.util.zip.ZipException: error in opening zip file"></a>初始时：Exception in thread “main” java.util.zip.ZipException: error in opening zip file</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /User/用户名/.gradle/wrapper/dists/</span><br></pre></td></tr></table></figure><p>删掉对应<code>gradle.***-all</code>文件夹，让他重新下载，或者搜索gradle.zip离线下载。</p><a id="more"></a>]]></content>
+      
+      
+      <categories>
+          
+          <category> code </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Flutter </tag>
+            
+            <tag> iOS </tag>
+            
+            <tag> Android </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>【Swoole】Swoole多进程不能共用连接&amp;TCP协议包完整性</title>
       <link href="/2017/04/25/swoole-multiple-processes/"/>
       <url>/2017/04/25/swoole-multiple-processes/</url>
@@ -46,9 +73,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> iOS </tag>
+            
+            <tag> Android </tag>
             
             <tag> ionic </tag>
             
@@ -79,11 +106,11 @@
       
         <tags>
             
-            <tag> ReactNative </tag>
+            <tag> iOS </tag>
             
             <tag> Android </tag>
             
-            <tag> iOS </tag>
+            <tag> ReactNative </tag>
             
         </tags>
       
@@ -106,9 +133,9 @@
       
         <tags>
             
-            <tag> Android </tag>
-            
             <tag> iOS </tag>
+            
+            <tag> Android </tag>
             
             <tag> ionic </tag>
             

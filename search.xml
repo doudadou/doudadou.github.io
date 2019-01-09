@@ -3,11 +3,11 @@
   
     
     <entry>
-      <title>Flutter Learning（持续更新...）</title>
-      <link href="/2018/12/28/flutter-learning/"/>
-      <url>/2018/12/28/flutter-learning/</url>
+      <title>Flutter常见错误解决方法（持续更新...）</title>
+      <link href="/2018/12/28/flutter-skill/"/>
+      <url>/2018/12/28/flutter-skill/</url>
       
-        <content type="html"><![CDATA[<h1 id="一、Flutter资料"><a href="#一、Flutter资料" class="headerlink" title="一、Flutter资料"></a>一、Flutter资料</h1><ul><li><a href="https://flutter.io/docs" target="_blank" rel="noopener">Flutter官方文档</a></li><li><a href="https://book.flutterchina.club/" target="_blank" rel="noopener">Flutter实战电子书</a></li><li><a href="http://dart.goodev.org/guides/language/language-tour" target="_blank" rel="noopener">Dart语法入门</a></li><li><a href="https://pub.dartlang.org/flutter" target="_blank" rel="noopener">Flutter Packages</a></li></ul><ul><li>开源项目<ul><li><a href="https://github.com/alibaba/flutter-common-widgets-app" target="_blank" rel="noopener">Flutter菜鸟手册</a></li></ul></li></ul>]]></content>
+        <content type="html"><![CDATA[<h2 id="初始时：Exception-in-thread-“main”-java-util-zip-ZipException-error-in-opening-zip-file"><a href="#初始时：Exception-in-thread-“main”-java-util-zip-ZipException-error-in-opening-zip-file" class="headerlink" title="初始时：Exception in thread “main” java.util.zip.ZipException: error in opening zip file"></a>初始时：Exception in thread “main” java.util.zip.ZipException: error in opening zip file</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /User/用户名/.gradle/wrapper/dists/</span><br></pre></td></tr></table></figure><p>删掉对应<code>gradle.***-all</code>文件夹，让他重新下载，或者搜索gradle.zip离线下载。</p><a id="more"></a>]]></content>
       
       
       <categories>
@@ -26,11 +26,11 @@
     </entry>
     
     <entry>
-      <title>Flutter常见错误解决方法（持续更新...）</title>
-      <link href="/2018/12/28/flutter-skill/"/>
-      <url>/2018/12/28/flutter-skill/</url>
+      <title>Flutter Learning（持续更新...）</title>
+      <link href="/2018/12/28/flutter-learning/"/>
+      <url>/2018/12/28/flutter-learning/</url>
       
-        <content type="html"><![CDATA[<h2 id="初始时：Exception-in-thread-“main”-java-util-zip-ZipException-error-in-opening-zip-file"><a href="#初始时：Exception-in-thread-“main”-java-util-zip-ZipException-error-in-opening-zip-file" class="headerlink" title="初始时：Exception in thread “main” java.util.zip.ZipException: error in opening zip file"></a>初始时：Exception in thread “main” java.util.zip.ZipException: error in opening zip file</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /User/用户名/.gradle/wrapper/dists/</span><br></pre></td></tr></table></figure><p>删掉对应<code>gradle.***-all</code>文件夹，让他重新下载，或者搜索gradle.zip离线下载。</p><a id="more"></a>]]></content>
+        <content type="html"><![CDATA[<h1 id="一、Flutter资料"><a href="#一、Flutter资料" class="headerlink" title="一、Flutter资料"></a>一、Flutter资料</h1><ul><li><a href="https://flutter.io/docs" target="_blank" rel="noopener">Flutter官方文档</a></li><li><a href="https://book.flutterchina.club/" target="_blank" rel="noopener">Flutter实战电子书</a></li><li><a href="http://dart.goodev.org/guides/language/language-tour" target="_blank" rel="noopener">Dart语法入门</a></li><li><a href="https://pub.dartlang.org/flutter" target="_blank" rel="noopener">Flutter Packages</a></li></ul><ul><li>开源项目<ul><li><a href="https://github.com/alibaba/flutter-common-widgets-app" target="_blank" rel="noopener">Flutter菜鸟手册</a></li></ul></li></ul>]]></content>
       
       
       <categories>

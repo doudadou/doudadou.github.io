@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>Flutter Learning（持续更新...）</title>
+      <link href="/2018/12/28/flutter-learning/"/>
+      <url>/2018/12/28/flutter-learning/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、Flutter资料"><a href="#一、Flutter资料" class="headerlink" title="一、Flutter资料"></a>一、Flutter资料</h1><ul><li><a href="https://flutter.io/docs" target="_blank" rel="noopener">Flutter官方文档</a></li><li><a href="https://book.flutterchina.club/" target="_blank" rel="noopener">Flutter实战电子书</a></li><li><a href="http://dart.goodev.org/guides/language/language-tour" target="_blank" rel="noopener">Dart语法入门</a></li><li><a href="https://pub.dartlang.org/flutter" target="_blank" rel="noopener">Flutter Packages</a></li></ul><ul><li>开源项目<ul><li><a href="https://github.com/alibaba/flutter-common-widgets-app" target="_blank" rel="noopener">Flutter菜鸟手册</a></li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> code </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Flutter </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Flutter常见错误解决方法（持续更新...）</title>
       <link href="/2018/12/28/flutter-skill/"/>
       <url>/2018/12/28/flutter-skill/</url>
@@ -18,10 +41,6 @@
       
       
         <tags>
-            
-            <tag> iOS </tag>
-            
-            <tag> Android </tag>
             
             <tag> Flutter </tag>
             
